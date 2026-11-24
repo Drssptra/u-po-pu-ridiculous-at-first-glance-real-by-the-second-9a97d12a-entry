@@ -1,16 +1,20 @@
-// The entry: one sentence, 119 characters, pitching a startup that sounds
-// like a joke until the business logic lands.
+// Entry: one sentence, 181 characters, pitching a startup that sounds
+// absurd until the business logic lands — sheep as the lawn crew for
+// solar farms (real practice: solar grazing, paid per acre, wool on top).
 const SENTENCE =
-  "We hire retired lighthouse keepers to read tide tables aloud on the phone until insomniacs fall asleep, at $3 a minute.";
+  "We lease sheep to solar farms to mow the grass under the panels, because mowers spark near high voltage and sheep don't — and the farms pay us per acre while we still sell the wool.";
 
-// The harness points at the output directory with MAKEFUN_OUTPUT_DIR
-// (/output in the grader). Running by hand falls back to a local folder.
+// Gate: 1-200 characters, a single sentence, no trailing newline in the file.
+if (SENTENCE.length < 1 || SENTENCE.length > 200) {
+  throw new Error(`entry is ${SENTENCE.length} characters, must be 1-200`);
+}
+
 const { mkdirSync, writeFileSync } = require("node:fs");
 const { join } = require("node:path");
 
 const outputDir = process.env.MAKEFUN_OUTPUT_DIR ?? "output";
 mkdirSync(outputDir, { recursive: true });
-writeFileSync(join(outputDir, "entry.txt"), SENTENCE + "\n", "utf8");
+writeFileSync(join(outputDir, "entry.txt"), SENTENCE, "utf8");
 
-// Stdout carries exactly the one sentence and nothing else.
+// Stdout may carry the sentence plus a newline; the file stays exact.
 process.stdout.write(SENTENCE + "\n");
